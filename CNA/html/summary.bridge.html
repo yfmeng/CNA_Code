@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Network Bridging Summaries</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+</head><body>
+
+<table width="100%" summary="page for summary.bridge"><tr><td>summary.bridge</td><td align="right">R Documentation</td></tr></table>
+
+<h2>
+Network Bridging Summaries
+</h2>
+
+<h3>Description</h3>
+
+
+<p>summary.brige summarises the bridging behaviour in a network
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+summary.bridge(node.bridge)
+</pre>
+
+
+<h3>Arguments</h3>
+
+
+<table summary="R argblock">
+<tr valign="top"><td><code>node.bridge</code></td>
+<td>
+
+<p>data frame, obtained by <code>bridge</code>
+</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+
+<p>The returned object is a data frame, specifying number of nodes, average degree, the maximum bridge width, number of bridges in the network and the percentage of individuals who play the roll of a bridge.
+</p>
+
+
+<h3>Author(s)</h3>
+
+
+<p>Fei MENG &lt;fei.d.meng@gmail.com&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+
+<p><code>bridge</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+male.id&lt;-c(1, 2, 3, 4, 4, 5, 5, 6, 7)
+female.id&lt;-c(8, 9, 10, 10, 11, 12, 10, 13, 14)
+male.age &lt;- c(15, 20, 18, 40, 40, 26, 26, 25, 23)
+female.age &lt;- c(19, 14, 15, 15, 45, 24, 15, 25, 22)
+contact&lt;-c(1, 1.2, 0.5, 0.2, 0.8, 1.4, 1, 2, 1.1)
+r&lt;-data.frame(male.id,female.id, male.age,female.age,contact)
+gap&lt;-10
+this.bridge&lt;-bridge(male.id,female.id,male.age,female.age,contact,data=r,gap=10)
+summary.bridge(this.bridge)
+
+#  "summary of bridging behaviour"
+#  no.of.nodes ave.degree max.gap no.of.bridge percentage
+#          14       1.29      30            2      14.29
+# 2 of the 14 nodes are bridges
+# the mean number of partners is 1.29
+# the maximum age difference among partners of one individual is 30 years
+  </pre>
+
+
+</body></html>

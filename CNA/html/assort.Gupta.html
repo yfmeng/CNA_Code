@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Gupta's Q Index for Measuring Network Assortativeness</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+</head><body>
+
+<table width="100%" summary="page for assort.Gupta"><tr><td>assort.Gupta</td><td align="right">R Documentation</td></tr></table>
+
+<h2>
+Gupta's Q Index for Measuring Network Assortativeness
+</h2>
+
+<h3>Description</h3>
+
+
+<p>assort.Gupta is used to calculate the network assortativeness using Gupta's Q method. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+assort.Gupta(x1, x2, contact, data, cate, directed = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x1</code></td>
+<td>
+
+<p>the value of the concerned variable of the individual at one end of a link
+</p>
+</td></tr>
+<tr valign="top"><td><code>x2</code></td>
+<td>
+
+<p>the value of the concerned variable of the other individual
+</p>
+</td></tr>
+<tr valign="top"><td><code>contact</code></td>
+<td>
+
+<p>contact rate between two individuals
+</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+
+<p>a data frame, containing the variables in the model
+</p>
+</td></tr>
+<tr valign="top"><td><code>cate</code></td>
+<td>
+
+<p>a vector, specifying the cutpoints of subgroup division
+</p>
+</td></tr>
+<tr valign="top"><td><code>directed</code></td>
+<td>
+
+<p>logical, indicating whether the network is directed
+</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+
+
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+
+
+<p>The assort.Newman function uses edge list data of contact networks.
+</p>
+
+
+<h3>Value</h3>
+
+
+<p>The returned value is a data frame.
+</p>
+
+
+<h3>Author(s)</h3>
+
+
+
+<p>Fei MENG &lt;fei.d.meng@gmail.com&gt;
+</p>
+
+
+<h3>References</h3>
+
+
+<p>Gupta S., Anderson R.M., and May, R.M. (1989) Networks of sexual contacts: implications for the patterns of spread of HIV. AIDS. 3. 807-817.
+</p>
+
+
+<h3>See Also</h3>
+
+
+
+<p>Other measures of assortativeness in CNA package are <code>assort.Newman</code>, <code>assort.Farrington</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+male.id&lt;-c(1, 2, 3, 4, 4, 5, 5, 6, 7)
+female.id&lt;-c(8, 9, 10, 10, 11, 12, 10, 13, 14)
+male.age &lt;- c(15, 20, 18, 40, 40, 26, 26, 25, 23)
+female.age &lt;- c(19, 14, 15, 15, 45, 24, 15, 25, 22)
+contact&lt;-c(1, 1.2, 0.5, 0.2, 0.8, 1.4, 1, 2, 1.1)
+r&lt;-data.frame(male.id,female.id, male.age,female.age,contact)
+directed&lt;-TRUE
+
+cate&lt;-seq(10,50,10)
+Q&lt;-assort.Gupta(male.age,female.age,contact,cate,data=r,directed)
+print(Q)
+# the Gupta's Q coefficient of the network is 0.78
+# if the population is divided into 4 age groups
+
+cate&lt;-seq(10,50,5)
+Q&lt;-assort.Gupta(male.age,female.age,contact,cate,data=r,directed)
+print(Q)
+# the Gupta's Q coefficient of the network is 0.34
+# if the population is divided into 9 age groups
+</pre>
+
+
+</body></html>
