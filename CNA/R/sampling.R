@@ -57,7 +57,7 @@ sampling<-function(id.names,data,method,...){
         }
       
       sampled<-c()
-      last.size<-n.start
+      last.size<-0
       this.size<-length(sampled.node)
       temp.node<-c()
       wave<-0

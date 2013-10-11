@@ -13,6 +13,6 @@ neighbour<-function(x1.id, x2.id, root.nodes, data, size){
   included<-sample.int(length(linked),size)
   included<-linked[included]
   }
-  neighbours<data[included,]
+  neighbours<-data[included,]
   invisible(neighbours)
 }
