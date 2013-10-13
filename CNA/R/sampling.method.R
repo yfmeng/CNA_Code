@@ -27,6 +27,7 @@ sampling.method<-function(method){
       r$name<-'star'
       r$n.start<-as.numeric(method[2])
     }
+    
     if (name=='tracing'){
       r$name <- 'tracing'
       r$n.start<-as.numeric(method[2])

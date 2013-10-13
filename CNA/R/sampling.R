@@ -1,5 +1,4 @@
 sampling<-function(id.names,data,method,...){
-  warning('snowball method needs debugging')
   # methods: induced, incident, star, snowball, tracing
 
   data$edge.index<-1:nrow(data)
@@ -56,15 +55,13 @@ sampling<-function(id.names,data,method,...){
         sampled.node<-nodes[sample.int(population,n.start)]
         }
       
-      sampled<-c()
       last.size<-0
       this.size<-length(sampled.node)
       temp.node<-c()
       wave<-0
       
      repeat{
-       if (length(sampled.node)>=population|wave>=method$waves) { break }
-       
+       if (length(sampled.node)>=population|wave>=method$waves) { break }       
        if(this.size==last.size){
          # reach the boundary of the components
          if (resample){
@@ -76,10 +73,9 @@ sampling<-function(id.names,data,method,...){
        }  
        last.size<-length(sampled.node)
        sampled.node<-c(sampled.node,temp.node)
-       sampled<-rbind(sampled,neighbour(id.names[1],id.names[2],sampled.node,data,population))
-       sampled<-rbind(sampled,neighbour(id.names[2],id.names[1],sampled.node,data,population))
+       sampled<-rbind(sampled,neighbour(id.names[1],id.names[2],sampled.node,data))
        sampled<-sampled[!duplicated(sampled$edge.index),]
-       sampled.node<-unique(c(sampled.node,sampled$neighbour))   
+       sampled.node<-c(sampled.node,sampled[,location[1]],sampled[,location[2]])   
        this.size<-length(sampled.node)
        wave<-wave+1
      }     
@@ -98,7 +94,6 @@ sampling<-function(id.names,data,method,...){
         sampled.node<-nodes[sample.int(population,n.start)]
       }
       sampled<-neighbour(id.names[1], id.names[2], sampled.node, data, population)
-      sampled<-rbind(sampled,neighbour(id.names[2], id.names[1], sampled.node, data, population))
       sampled<-sampled[!duplicated(sampled$edge.index),]
     }# star
     
@@ -115,7 +110,6 @@ sampling<-function(id.names,data,method,...){
       }else{
         sampled.node<-nodes[sample.int(population,n.start)]
       }
-      
       p<-method$recruit.rate #recruit rate
       this.size<-length(sampled.node)
       last.size<-0
@@ -126,16 +120,15 @@ sampling<-function(id.names,data,method,...){
         last.size<-length(sampled.node)
         
         for (i in sampled.node){
-          temp<-neighbour(id.names[1],id.names[2],i,data,population)
-          temp<-rbind(temp,neighbour(id.names[2],id.names[1],i,data,population))
+          temp<-neighbour(id.names[1],id.names[2],i,data,size=population)
           temp.size<-nrow(temp)
-          if(temp.size>=1){
-          temp<-temp[sample.int(temp.size,1),]
-          sampled<-rbind(sampled,temp)
+          if(temp.size>=p*this.size){
+          temp<-temp[sample.int(temp.size,round(p*this.size)),]
           } 
+          sampled<-rbind(sampled,temp)
         }
         sampled<-sampled[!duplicated(sampled$edge.index),]
-        sampled.node<-c(sampled.node,sampled$neighbour)
+        sampled.node<-c(sampled.node,sampled[,location[1]],sampled[,location[2]])
         sampled.node<-unique(sampled.node)
         this.size<-length(sampled.node)
         wave<-wave+1
