@@ -121,11 +121,11 @@ sampling<-function(id.names,data,method,...){
         
         for (i in sampled.node){
           temp<-neighbour(id.names[1],id.names[2],i,data,size=population)
+          temp<-temp[sample.int(temp.size,1),]
           temp.size<-nrow(temp)
-          if(temp.size>=p*this.size){
-          temp<-temp[sample.int(temp.size,round(p*this.size)),]
-          } 
-          sampled<-rbind(sampled,temp)
+          if((p<1&runif(1)<=p)|p>=1){
+            sampled<-rbind(sampled,temp)
+          }           
         }
         sampled<-sampled[!duplicated(sampled$edge.index),]
         sampled.node<-c(sampled.node,sampled[,location[1]],sampled[,location[2]])
