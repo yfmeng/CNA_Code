@@ -15,6 +15,8 @@ sd.jackknife<-function(x1,x2,contact,data,cate,method,...){
       temp<-eval(xpress)
       full.i[i]<-temp[,ncol(temp)]
     }
-    sd.jackknife<-sum((full.i-full)^2)
-  sd.jackknife
+    jackknife<-sum((full.i-full)^2)
+    jackknife<-list(jackknife,sample.values=full.i)
+    names(jackknife)[1]<-'sd.jackknife'
+    invisible(jackknife)
 }
