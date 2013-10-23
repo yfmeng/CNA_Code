@@ -19,5 +19,6 @@ neighbour<-function(x1.id, x2.id, root.nodes, data, ...){
   
   neighboured<-unique(c(x1[linked],x2[linked]))
   neighbours<-data[linked,]
+  neighbours<-neighbours[!duplicated(data$edge.index),]
   invisible(neighbours)
 }

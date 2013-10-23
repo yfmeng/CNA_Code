@@ -61,7 +61,8 @@ sampling<-function(id.names,data,method,...){
       wave<-0
       
      repeat{
-       if (length(sampled.node)>=population|wave>=method$waves) { break }       
+       if (length(sampled.node)>=population|wave>=method$waves) { break 
+       }else{
        if(this.size==last.size){
          # reach the boundary of the components
          if (resample){
@@ -76,16 +77,18 @@ sampling<-function(id.names,data,method,...){
        sampled<-rbind(sampled,neighbour(id.names[1],id.names[2],sampled.node,data))
        sampled<-sampled[!duplicated(sampled$edge.index),]
        sampled.node<-c(sampled.node,sampled[,location[1]],sampled[,location[2]])   
+       sampled.node<-sampled.node[!duplicated(sampled.node)]
        this.size<-length(sampled.node)
        wave<-wave+1
-     }     
+      }
+     }
     }# snowball
     
     if (method$name=='star'){
       # star
       n.start<-method$n.start
-      if(exists(initial)){
-        if(length(initial)>population) {
+      if(exists('initial')){
+        if(length('initial')>population) {
           warning("number of seeds exceeds target population size")
           stop
         }
@@ -115,7 +118,7 @@ sampling<-function(id.names,data,method,...){
       last.size<-0
       wave<-0
       repeat{
-        if (length(sampled.node)>=population) { break }
+        if ((length(sampled.node)>=population)) { break }
         if (this.size-last.size<=threshold&wave>=1) { break }
         last.size<-length(sampled.node)
         
@@ -129,11 +132,12 @@ sampling<-function(id.names,data,method,...){
         }
         sampled<-sampled[!duplicated(sampled$edge.index),]
         sampled.node<-c(sampled.node,sampled[,location[1]],sampled[,location[2]])
-        sampled.node<-unique(sampled.node)
+        sampled.node<-sampled.node[!duplicated(sampled.node)]
         this.size<-length(sampled.node)
         wave<-wave+1
       }
     }# tracing
   }
+  sampled<-sampled[!duplicated(sampled$edge.index),]
   invisible(sampled)
 }

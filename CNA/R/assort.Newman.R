@@ -1,5 +1,5 @@
 
-assort.Newman<-function(x1,x2,contact=rep(1,length(x1)),data,cate,...){
+assort.Newman<-function(x1,x2,contact,data,cate,...){
   x1.name<-deparse(substitute(x1))
   x2.name<-deparse(substitute(x2))
   contact.name<-deparse(substitute(contact))
