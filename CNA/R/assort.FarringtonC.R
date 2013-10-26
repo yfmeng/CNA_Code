@@ -1,4 +1,4 @@
-assort.FarringtonC<-function(x1,x2,contact,data,family,directed=TRUE,...){
+assort.FarringtonC<-function(x1,x2,contact,data,directed=TRUE,...){
   # continuous Farrington
   x1.name<-deparse(substitute(x1))
   x2.name<-deparse(substitute(x2))
@@ -18,6 +18,8 @@ assort.FarringtonC<-function(x1,x2,contact,data,family,directed=TRUE,...){
   # mean value in each bin
   s1<-c()
   s2<-c()
+  
+  if(!exists('family')){family<-'empirical'}
   
   if (family=='empirical'){
     # use empirical distribution

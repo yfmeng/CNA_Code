@@ -15,7 +15,7 @@ assort.Gupta<-function(x1,x2,contact,data,cate,...){
   for (i in 1:n){
     for (j in 1:n){
       contactij<-sum(contact[x1<=cate[i+1]&x1>cate[i]&x2<=cate[j+1]&x2>cate[j]])
-      if (i==j){on.diag<-on.diag+contactij}
+      on.diag<-on.diag+contactij*(i==j)
       all<-all+contactij
     }
   }

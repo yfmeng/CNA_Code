@@ -1,4 +1,4 @@
-sd.kappa<-function(x1,x2,contact,data,cate,method,...){
+sd.kappa<-function(x1,x2,contact,data,cate,...){
   x1.name<-deparse(substitute(x1))
   x2.name<-deparse(substitute(x2))
   contact.name<-deparse(substitute(contact))

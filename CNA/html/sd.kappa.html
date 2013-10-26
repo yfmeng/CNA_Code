@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Standard Error of Newman's Coefficient using Cohen's Kappa...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+</head><body>
+
+<table width="100%" summary="page for sd.kappa"><tr><td>sd.kappa</td><td align="right">R Documentation</td></tr></table>
+
+<h2>
+Standard Error of Newman's Coefficient using Cohen's Kappa Method
+</h2>
+
+<h3>Description</h3>
+
+
+<p>sd.kappa estimates the standard error of Newman's mixing coefficient using a formula that is adapted from Cohen's Kappa.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+sd.kappa(x1, x2, contact, data, cate, method, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x1</code></td>
+<td>
+
+<p>the value of the concerned variable of the individual at one end of a link
+
+</p>
+</td></tr>
+<tr valign="top"><td><code>x2</code></td>
+<td>
+
+<p>the value of the concerned variable of the other individual
+
+</p>
+</td></tr>
+<tr valign="top"><td><code>contact</code></td>
+<td>
+
+<p>contacts between two individuals
+</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+
+<p>a data frame, containing the variables in the model
+</p>
+</td></tr>
+<tr valign="top"><td><code>cate</code></td>
+<td>
+
+<p>a vector, specifying the cutpoints of subgroup division</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+
+
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+
+<p>The returned value is numeric.
+</p>
+
+
+<h3>Author(s)</h3>
+
+
+<p>Fei MENG &lt;fei.d.meng@gmail.com&gt;
+</p>
+
+
+<h3>References</h3>
+
+
+<p>Cohen, Jacob (1960). &quot;A coefficient of agreement for nominal scales&quot;. Educational and Psychological Measurement 20 (1): 37–46. doi:10.1177/001316446002000104
+</p>
+
+
+<h3>See Also</h3>
+
+
+<p><code>assort.Newman</code>
+</p>
+
+
+</body></html>

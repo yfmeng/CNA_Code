@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Contact Network Assortativeness</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+</head><body>
+
+<table width="100%" summary="page for CNA-package"><tr><td>CNA-package</td><td align="right">R Documentation</td></tr></table>
+
+<h2>
+Contact Network Assortativeness
+</h2>
+
+<h3>Description</h3>
+
+
+<p>This package calculate the assortativeness and bridging behaviours of a network using edge list data.
+</p>
+
+
+<h3>Details</h3>
+
+
+
+<table summary="Rd table">
+<tr>
+ <td align="left">
+Package: </td><td align="left"> CNA</td>
+</tr>
+<tr>
+ <td align="left">
+Type: </td><td align="left"> Package</td>
+</tr>
+<tr>
+ <td align="left">
+Version: </td><td align="left"> 1.0</td>
+</tr>
+<tr>
+ <td align="left">
+Date: </td><td align="left"> 2013-09-10</td>
+</tr>
+<tr>
+ <td align="left">
+License: </td><td align="left"> Artistic Lisence</td>
+</tr>
+<tr>
+ <td align="left">
+</td>
+</tr>
+
+</table>
+
+<p><code>
+ assort.Farrington,
+ assort.Gupta,
+ assort.Newman,
+ bridge,
+ summary.bridge,
+ contact.beta,
+ fc,
+ matrix2list,
+ neighbour
+ sampling,
+ sampling.method,
+ </code>
+</p>
+
+
+<h3>Author(s)</h3>
+
+
+<p>Fei MENG &lt;fei.d.meng@gmail.com&gt;
+</p>
+
+
+<h3>Examples</h3>
+
+<pre> 
+# let data frame r be an edge list dataset of 
+# a small heterosexual contact network with 7 males and 7 females
+male.id&lt;-c(1, 2, 3, 4, 4, 5, 5, 6, 7)
+female.id&lt;-c(8, 9, 10, 10, 11, 12, 10, 13, 14)
+male.age &lt;- c(15, 20, 18, 40, 40, 26, 26, 25, 23)
+female.age &lt;- c(19, 14, 15, 15, 45, 24, 15, 25, 22)
+contact&lt;-c(1, 1.2, 0.5, 0.2, 0.8, 1.4, 1, 2, 1.1)
+r&lt;-data.frame(male.id,female.id, male.age,female.age,contact)
+
+# thus the data frame r is an edge list of the network
+#  male.id female.id male.age female.age contact
+#       1         8       15         19     1.0
+#       2         9       20         14     1.2
+#       3        10       18         15     0.5
+#       4        10       40         15     0.2
+#       4        11       40         45     0.8
+#       5        12       26         24     1.4
+#       5        10       26         15     1.0
+#       6        13       25         25     2.0
+#       7        14       23         22     1.1
+
+# in order to examine the assortativeness between age groups, 
+# divide the population into 5-year age groups
+cate&lt;-seq(10,50,5)
+directed&lt;-TRUE
+
+# calculate the assortative coefficients using different methods
+assort.Gupta(male.age,female.age,contact,cate,data=r,directed)
+assort.Newman(male.age,female.age,contact,cate,data=r,directed)
+assort.Farrington(male.age,female.age,contact,cate,data=r,directed)
+
+# visualise the contacts between subgroups
+beta&lt;-contact.beta(male.age,female.age,contact,cate,data=r,directed)
+f.c&lt;-fc(male.age,female.age,contact,cate,data=r,directed)
+image(cate,cate,f.c[[1]],col = rainbow(50),zlim = c(0,0.1),xlab='male age',ylab='female age')
+image(cate,cate,beta,col = rainbow(50),zlim = c(0,0.1),xlab='male age',ylab='female age')
+
+# identify the bridging nodes
+this.bridge&lt;-bridge(male.id,female.id,male.age,female.age,contact,data=r,gap=10)
+summary.bridge(this.bridge)
+
+</pre>
+
+
+</body></html>
