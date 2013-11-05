@@ -26,6 +26,19 @@ assort.Farrington<-function(x1,x2,contact,data,cate,directed=TRUE,...){
     if (is.na(s2[i])){s2[i]<-(cate[i]+cate[i+1])/2}
   }
   
+  if(exists('id.names')){
+    id.1<-data[,which(data.name==id.names[1])]
+    id.2<-data[,which(data.name==id.names[2])]
+    x1.temp<-x1[!duplicated(id.1)]
+    x2.temp<-x2[!duplicated(id.2)]
+    for (i in 1:(length(cate)-1)){
+      s1[i]<-mean(x1.temp[x1.temp>cate[i]&x1.temp<=cate[i+1]])
+      s2[i]<-mean(x2.temp[x2.temp>cate[i]&x2.temp<=cate[i+1]])
+      if (is.na(s1[i])){s1[i]<-(cate[i]+cate[i+1])/2}
+      if (is.na(s2[i])){s2[i]<-(cate[i]+cate[i+1])/2}
+    }
+  }
+  
   # n = number of categories 
   # distr = cumulative distribution of x1&x2
   n<-length(cate)-1

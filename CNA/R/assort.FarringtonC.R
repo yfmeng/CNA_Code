@@ -19,9 +19,9 @@ assort.FarringtonC<-function(x1,x2,contact,data,directed=TRUE,...){
   s1<-c()
   s2<-c()
   
-  if(!exists('family')){family<-'empirical'}
+  if(!exists('distr')){distr<-'empirical'}
   
-  if (family=='empirical'){
+  if (distr=='empirical'){
     # use empirical distribution
     s1<-sort(unique(x1))
     s2<-sort(unique(x2))
