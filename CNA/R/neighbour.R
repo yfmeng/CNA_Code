@@ -1,7 +1,7 @@
-neighbour<-function(x1.id, x2.id, root.nodes, data, ...){
+neighbour<-function(id.names, root.nodes, data, ...){
   
-  x1<-data[,which(names(data)==x1.id)]
-  x2<-data[,which(names(data)==x2.id)]
+  x1<-data[,which(names(data)==id.names[1])]
+  x2<-data[,which(names(data)==id.names[2])]
   if(!exists('direction')) {
     direction<-'undirected'
   }
@@ -19,6 +19,6 @@ neighbour<-function(x1.id, x2.id, root.nodes, data, ...){
   
   neighboured<-unique(c(x1[linked],x2[linked]))
   neighbours<-data[linked,]
-  neighbours<-neighbours[!duplicated(data$edge.index),]
+  neighbours<-neighbours[!duplicated(neighbours$edge.index),]
   invisible(neighbours)
 }

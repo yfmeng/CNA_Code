@@ -55,6 +55,8 @@ sampling<-function(id.names,data,method,...){
         sampled.node<-nodes[sample.int(population,n.start)]
         }
       
+      sampled<-data[data[,location[1]]%in%sampled.node|data[,location[2]]%in%sampled.node,]
+      sampled<-sampled[!duplicated(sampled$edge.index),]      
       last.size<-0
       this.size<-length(sampled.node)
       temp.node<-c()
@@ -68,14 +70,18 @@ sampling<-function(id.names,data,method,...){
          if (resample){
            temp.node<-nodes[!nodes%in%sampled.node]
            temp.node<-temp.node[sample.int(length(temp.node),increase)]
+           last.size<-length(sampled.node)   
+           sampled.node<-c(sampled.node,temp.node)
+           sampled<-data[data[,location[1]]%in%sampled.node|data[,location[2]]%in%sampled.node,]
+           sampled<-sampled[!duplicated(sampled$edge.index),]
          }else{
-           warning('Boundary reached'); break
+           warning('Boundary reached')
          }
-       }  
-       last.size<-length(sampled.node)
-       sampled.node<-c(sampled.node,temp.node)
+       }   else { # boundary not reached
+       last.size<-length(sampled.node)   
        sampled<-rbind(sampled,neighbour(id.names[1],id.names[2],sampled.node,data))
        sampled<-sampled[!duplicated(sampled$edge.index),]
+       }
        sampled.node<-c(sampled.node,sampled[,location[1]],sampled[,location[2]])   
        sampled.node<-sampled.node[!duplicated(sampled.node)]
        this.size<-length(sampled.node)
