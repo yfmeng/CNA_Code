@@ -1,23 +1,31 @@
-\name{assort.Newman}
-\alias{assort.Newman}
-\alias{assort.Newman}
+\name{contact.beta}
+\alias{contact.beta}
+\alias{contact.beta}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Newman's Index for Measuring Network Assortativeness
+%%  ~~function to do ... ~~
+Contact Rate Matrix
 }
 \description{
-assort.Newman is used to calculate the network assortativeness using Newman's method. 
+%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+\code{contact.beta} constructs a contact rate matrix based on edge list data
 }
 \usage{
-assort.Newman(g,attribute.name, ...)
+contact.beta(x1, x2, contact, cate, data, directed = TRUE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{g}{
-a network 
+   \item{x1}{
+the value of the concerned variable of the individual at one end of a link
 }
-  \item{attribute.name}{
-name of the vertex attribute to be measured
+  \item{x2}{
+the value of the concerned variable of the other individual
+}
+  \item{contact}{
+contact rate between two individuals
+}
+  \item{data}{
+a data frame, containing the variables in the model
 }
   \item{cate}{
 a vector, specifying the cutpoints of subgroup division
@@ -33,14 +41,14 @@ logical, indicating whether the network is directed
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-The returned value is a data frame.
+The returned value is a matrix.
+
 }
 \references{
-Newman, M.E.J. (2003) Mixing Patterns in Networks. Physical Review E 67. 026126.
+%% ~put references to the literature/web site here ~
 }
 \author{
 %%  ~~who you are~~
-Fei MENG <fei.d.meng@gmail.com>
 }
 \note{
 %%  ~~further notes~~
@@ -50,12 +58,9 @@ Fei MENG <fei.d.meng@gmail.com>
 
 \seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
-Other measures of assortativeness in \link{CNA} package are \code{\link[CNA]{assort.Gupta}}, \code{\link[CNA]{assort.Farrington}}
 }
 \examples{
-
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ assortativeness }
-\keyword{ contact network}
+\keyword{ contact networks }

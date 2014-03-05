@@ -1,15 +1,17 @@
-bridge<-function(x1id,x2id,x1,x2,contact,data,gap,...){
-  x1.name<-deparse(substitute(x1))
-  x2.name<-deparse(substitute(x2))
-  x1id.name<-deparse(substitute(x1id))
-  x2id.name<-deparse(substitute(x2id))
-  contact.name<-deparse(substitute(contact))
-  data.name<-names(data)
-  if(x1.name %in% data.name){x1<-data[,which(data.name==x1.name)]}
-  if(x2.name %in% data.name){x2<-data[,which(data.name==x2.name)]}
-  if(x1id.name %in% data.name){x1id<-data[,which(data.name==x1id.name)]}
-  if(x2id.name %in% data.name){x2id<-data[,which(data.name==x2id.name)]}
-  if(contact.name %in% data.name){contact<-data[,which(data.name==contact.name)]}
+bridge<-function(g,attribute.name,gap,...){
+  require('network')
+  require('sna')
+  edgelist <- as.edgelist.sna(g)
+  x1 <- get.vertex.attribute(g,attribute.name)[edgelist[,1]]
+  x2 <- get.vertex.attribute(g,attribute.name)[edgelist[,2]]
+  x1id<-edgelist[,1]
+  x2id<-edgelist[,2]
+  
+  if (exists('contact')){
+    if (!is.null(get.edge.attribute(g,attribute.name))){
+      contact <- get.edge.attribute(g,contact)
+    }else{contact<-rep(1,nrow(edgelist))}
+  }else{contact<-rep(1,nrow(edgelist))}
   
   node.id<-unique(c(x1id,x2id))
   node.degree<-rep(0,length(node.id))
@@ -26,5 +28,7 @@ bridge<-function(x1id,x2id,x1,x2,contact,data,gap,...){
       node.bridge[i]<-TRUE
     }
   }
-  node.bridge<-data.frame(node.id,node.degree,node.gap,node.bridge)
+  bridge<-data.frame(node.id,node.degree,node.gap)
+  bridge<-bridge[node.bridge,]
+  bridge
 }

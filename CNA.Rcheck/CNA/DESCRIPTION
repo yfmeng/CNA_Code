@@ -1,0 +1,11 @@
+Package: CNA
+Type: Package
+Title: Contact Network Assortativeness
+Version: 1.0
+Date: 2013-09-10
+Author: Fei MENG
+Maintainer: Fei MENG <fei.d.meng@gmail.com>
+Description: Contact Network Assortativeness
+License: Artistic Lisence
+Packaged: 2014-02-27 20:53:45 UTC; feimeng
+Built: R 2.15.2; ; 2014-02-27 20:53:46 UTC; unix

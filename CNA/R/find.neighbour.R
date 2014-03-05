@@ -1,7 +1,9 @@
-neighbour<-function(id.names, root.nodes, data, ...){
-  
-  x1<-data[,which(names(data)==id.names[1])]
-  x2<-data[,which(names(data)==id.names[2])]
+find.neighbour<-function(g,root.nodes,size, ...){
+  require('network')
+  require('sna')
+  edgelist <- as.edgelist.sna(g)
+  x1<-edgelist[,1]
+  x2<-edgelist[,2]
   if(!exists('direction')) {
     direction<-'undirected'
   }
