@@ -1,8 +1,7 @@
 
-R version 2.15.2 (2012-10-26) -- "Trick or Treat"
-Copyright (C) 2012 The R Foundation for Statistical Computing
-ISBN 3-900051-07-0
-Platform: x86_64-apple-darwin9.8.0/x86_64 (64-bit)
+R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"
+Copyright (C) 2013 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin10.8.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -23,7 +22,7 @@ Type 'q()' to quit R.
 > options(warn = 1)
 > library('CNA')
 > 
-> assign(".oldSearch", search(), pos = 'CheckExEnv')
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
 > cleanEx()
 > nameEx("CNA-package")
 > ### * CNA-package
@@ -66,19 +65,19 @@ Type 'q()' to quit R.
 > # calculate the assortative coefficients using different methods
 > assort.Gupta(male.age,female.age,contact,cate,data=r,directed)
 Loading required package: network
-Warning: package ‘network’ was built under R version 2.15.3
 network: Classes for Relational Data
-Version 1.7.2 created on March 15, 2013.
+Version 1.9.0 created on 2014-01-03.
 copyright (c) 2005, Carter T. Butts, University of California-Irvine
-                    Mark S. Handcock, University of Washington
+                    Mark S. Handcock, University of California -- Los Angeles
                     David R. Hunter, Penn State University
                     Martina Morris, University of Washington
+                    Skye Bender-deMoll, University of Washington
  For citation information, type citation("network").
  Type help("network-package") to get started.
 
 Loading required package: sna
 sna: Tools for Social Network Analysis
-Version 2.3-1 created on 2013-02-28.
+Version 2.3-2 created on 2014-01-13.
 copyright (c) 2005, Carter T. Butts, University of California-Irvine
  For citation information, type citation("sna").
  Type help(package="sna") to get started.
@@ -86,11 +85,11 @@ copyright (c) 2005, Carter T. Butts, University of California-Irvine
 
 Attaching package: ‘sna’
 
-The following object(s) are masked from ‘package:network’:
+The following object is masked from ‘package:network’:
 
     %c%
 
-The following object(s) are masked from ‘package:CNA’:
+The following object is masked from ‘package:CNA’:
 
     degree
 

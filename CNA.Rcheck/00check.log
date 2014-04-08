@@ -1,6 +1,6 @@
 * using log directory ‘/Users/feimeng/CNA_Code/CNA.Rcheck’
-* using R version 2.15.2 (2012-10-26)
-* using platform: x86_64-apple-darwin9.8.0 (64-bit)
+* using R version 3.0.2 (2013-09-25)
+* using platform: x86_64-apple-darwin10.8.0 (64-bit)
 * using session charset: UTF-8
 * checking for file ‘CNA/DESCRIPTION’ ... OK
 * checking extension type ... Package
@@ -10,11 +10,12 @@
 * checking if this is a source package ... OK
 * checking if there is a namespace ... OK
 * checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
 * checking whether package ‘CNA’ can be installed ... OK
 * checking installed package size ... OK
 * checking package directory ... OK
-* checking for portable file names ... OK
-* checking for sufficient/correct file permissions ... OK
 * checking DESCRIPTION meta-information ... WARNING
 Non-standard license specification:
   Artistic Lisence
@@ -30,7 +31,7 @@ Standardizable: FALSE
 * checking whether the package can be unloaded cleanly ... OK
 * checking whether the namespace can be loaded with stated dependencies ... OK
 * checking whether the namespace can be unloaded cleanly ... OK
-* checking for unstated dependencies in R code ... WARNING
+* checking dependencies in R code ... WARNING
 ‘library’ or ‘require’ calls not declared from:
   ‘network’ ‘plyr’ ‘sna’
 See the information on DESCRIPTION files in the chapter ‘Creating R
@@ -38,8 +39,8 @@ packages’ of the ‘Writing R Extensions’ manual.
 * checking S3 generic/method consistency ... WARNING
 summary:
   function(object, ...)
-summary.bridge:
-  function(node.bridge)
+summary.cna:
+  function(g, attribute.name, ...)
 
 simulate:
   function(object, nsim, seed, ...)
@@ -72,6 +73,10 @@ assort.Newman: no visible global function definition for
 assort.Newman: no visible global function definition for
   ‘get.edge.attribute’
 assort.Newman: no visible global function definition for ‘network.size’
+bridge: no visible global function definition for ‘as.edgelist.sna’
+bridge: no visible global function definition for
+  ‘get.vertex.attribute’
+bridge: no visible global function definition for ‘get.edge.attribute’
 find.neighbour: no visible global function definition for
   ‘as.edgelist.sna’
 list2network: no visible global function definition for ‘as.network’
@@ -89,6 +94,11 @@ sampling: no visible binding for global variable ‘init’
 sampling: no visible global function definition for ‘neighbour’
 sampling: no visible binding for global variable ‘n.end’
 simulate.asymmetric: no visible binding for global variable ‘shape’
+summary.cna: no visible global function definition for
+  ‘as.edgelist.sna’
+summary.cna: no visible global function definition for
+  ‘get.vertex.attribute’
+summary.cna: no visible binding for global variable ‘bipart’
 summarySE: no visible global function definition for ‘ddply’
 summarySE: no visible global function definition for ‘rename’
 * checking Rd files ... WARNING
@@ -101,6 +111,9 @@ prepare_Rd: assort.Gupta.Rd:56-58: Dropping empty section \examples
 prepare_Rd: assort.Newman.Rd:32-34: Dropping empty section \details
 prepare_Rd: assort.Newman.Rd:45-47: Dropping empty section \note
 prepare_Rd: assort.Newman.Rd:55-57: Dropping empty section \examples
+prepare_Rd: bridge.Rd:41-43: Dropping empty section \note
+prepare_Rd: bridge.Rd:35-37: Dropping empty section \references
+prepare_Rd: bridge.Rd:50-52: Dropping empty section \examples
 prepare_Rd: contact.beta.Rd:40-42: Dropping empty section \details
 prepare_Rd: contact.beta.Rd:53-55: Dropping empty section \note
 prepare_Rd: contact.beta.Rd:50-52: Dropping empty section \author
@@ -111,8 +124,6 @@ prepare_Rd: fc.Rd:38-40: Dropping empty section \details
 prepare_Rd: fc.Rd:58-60: Dropping empty section \note
 prepare_Rd: fc.Rd:64-66: Dropping empty section \seealso
 prepare_Rd: fc.Rd:67-68: Dropping empty section \examples
-prepare_Rd: find.bridge.Rd:53-55: Dropping empty section \note
-prepare_Rd: find.bridge.Rd:47-49: Dropping empty section \references
 prepare_Rd: find.neighbour.Rd:27-29: Dropping empty section \details
 prepare_Rd: find.neighbour.Rd:39-41: Dropping empty section \note
 prepare_Rd: find.neighbour.Rd:33-35: Dropping empty section \references
@@ -137,15 +148,14 @@ prepare_Rd: sd.jackknife.Rd:39-41: Dropping empty section \details
 prepare_Rd: sd.jackknife.Rd:51-53: Dropping empty section \note
 prepare_Rd: sd.jackknife.Rd:45-47: Dropping empty section \references
 prepare_Rd: sd.jackknife.Rd:64: Dropping empty section \examples
-Error : sd.kappa.Rd: non-ASCII input and no declared encoding
-
-prepare_Rd: summary.bridge.Rd:20-22: Dropping empty section \details
-prepare_Rd: summary.bridge.Rd:32-34: Dropping empty section \note
-prepare_Rd: summary.bridge.Rd:26-28: Dropping empty section \references
+sd.kappa.Rd: non-ASCII input and no declared encoding
 problem found in ‘sd.kappa.Rd’
 * checking Rd metadata ... OK
 * checking Rd cross-references ... WARNING
-Missing link(s) in documentation object ‘/Users/feimeng/CNA_Code/CNA.Rcheck/00_pkg_src/CNA/man/sampling.method.Rd’:
+Missing link or links in documentation object ‘/Users/feimeng/CNA_Code/CNA.Rcheck/00_pkg_src/CNA/man/bridge.Rd’:
+  ‘summary.bridge’
+
+Missing link or links in documentation object ‘/Users/feimeng/CNA_Code/CNA.Rcheck/00_pkg_src/CNA/man/sampling.method.Rd’:
   ‘neighbour’
 
 See the information in section ‘Cross-references’ of the ‘Writing R
@@ -153,27 +163,28 @@ Extensions’ manual.
 
 * checking for missing documentation entries ... WARNING
 Undocumented code objects:
-  ‘assort.FarringtonC’ ‘degree’ ‘list2network’ ‘normDataWithin’
-  ‘simulate.asymmetric’ ‘summarySE’ ‘summarySEwithin’
+  ‘assort.FarringtonC’ ‘convert’ ‘degree’ ‘list2network’
+  ‘normDataWithin’ ‘simulate.asymmetric’ ‘summary.cna’ ‘summarySE’
+  ‘summarySEwithin’
 Undocumented data sets:
   ‘relationship’
 All user-level objects in a package should have documentation entries.
 See the chapter ‘Writing R documentation files’ in the ‘Writing R
 Extensions’ manual.
 * checking for code/documentation mismatches ... WARNING
-Functions/methods with usage in documentation object 'find.neighbour' but not in code:
+Functions or methods with usage in documentation object 'find.neighbour' but not in code:
   neighbour
 
 Codoc mismatches from documentation object 'bridge':
 bridge
-  Code: function(x1id, x2id, x1, x2, contact, data, gap, ...)
-  Docs: function(x1id, x2id, x1, x2, contact, data, gap...)
+  Code: function(g, attribute.name, gap, ...)
+  Docs: function(g, attribute.name, gap...)
   Argument names in code not in docs:
     gap ...
   Argument names in docs not in code:
     gap...
   Mismatches in argument names:
-    Position: 7 Code: gap Docs: gap...
+    Position: 3 Code: gap Docs: gap...
 
 Codoc mismatches from documentation object 'sampling':
 sampling
@@ -230,13 +241,6 @@ entries, and all their arguments documented.
 The \usage entries must correspond to syntactically valid R code.
 See the chapter ‘Writing R documentation files’ in the ‘Writing R
 Extensions’ manual.
-S3 methods shown with full name in documentation object 'summary.bridge':
-  ‘summary.bridge’
-
-The \usage entries for S3 methods should use the \method markup and not
-their full name.
-See the chapter ‘Writing R documentation files’ in the ‘Writing R
-Extensions’ manual.
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
 * checking contents of ‘data’ directory ... OK
@@ -282,19 +286,19 @@ The error most likely occurred in:
 > # calculate the assortative coefficients using different methods
 > assort.Gupta(male.age,female.age,contact,cate,data=r,directed)
 Loading required package: network
-Warning: package ‘network’ was built under R version 2.15.3
 network: Classes for Relational Data
-Version 1.7.2 created on March 15, 2013.
+Version 1.9.0 created on 2014-01-03.
 copyright (c) 2005, Carter T. Butts, University of California-Irvine
-                    Mark S. Handcock, University of Washington
+                    Mark S. Handcock, University of California -- Los Angeles
                     David R. Hunter, Penn State University
                     Martina Morris, University of Washington
+                    Skye Bender-deMoll, University of Washington
  For citation information, type citation("network").
  Type help("network-package") to get started.
 
 Loading required package: sna
 sna: Tools for Social Network Analysis
-Version 2.3-1 created on 2013-02-28.
+Version 2.3-2 created on 2014-01-13.
 copyright (c) 2005, Carter T. Butts, University of California-Irvine
  For citation information, type citation("sna").
  Type help(package="sna") to get started.
@@ -302,11 +306,11 @@ copyright (c) 2005, Carter T. Butts, University of California-Irvine
 
 Attaching package: ‘sna’
 
-The following object(s) are masked from ‘package:network’:
+The following object is masked from ‘package:network’:
 
     %c%
 
-The following object(s) are masked from ‘package:CNA’:
+The following object is masked from ‘package:CNA’:
 
     degree
 

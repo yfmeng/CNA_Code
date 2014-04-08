@@ -16,4 +16,3 @@ sampling.method         Network Sampling Method
 sd.jackknife            Standard Error Using Jackknife Method
 sd.kappa                Standard Error of Newman's Coefficient using
                         Cohen's Kappa Method
-summary.bridge          Network Bridging Summaries

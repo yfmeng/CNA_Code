@@ -1,9 +1,12 @@
-assort.Farrington<-function(g,attribute.name,bi=c(F,'gender'),directed=TRUE,...){
+assort.Farrington<-function(g,attribute.name,bi=c(F,'gender'),directed=TRUE,standard = 'sd',...){
   require('network')
   require('sna')
   edgelist <- as.edgelist.sna(g)
   x1 <- get.vertex.attribute(g,attribute.name)[edgelist[,1]]
   x2 <- get.vertex.attribute(g,attribute.name)[edgelist[,2]]
+  size.x<-length(x1)/2
+  x1 <- x1[1:size.x]
+  x2 <- x2[1:size.x]
   if (exists('contact')){
     if (!is.null(get.edge.attribute(g,attribute.name))){
       contact <- get.edge.attribute(g,contact)
@@ -78,7 +81,7 @@ assort.Farrington<-function(g,attribute.name,bi=c(F,'gender'),directed=TRUE,...)
       I <- I+(f.c[[3]]$s1[i]-f.c[[3]]$s2[j])^2*f.c[[1]][i,j]
     }
   }
-  I<-I/2/sd(c(x1,x2))^2
+  if(standard=='sd'){I<-I/2/sd(c(x1,x2))^2}
   I<-data.frame(categories = n,sample.size = network.size(g),contacts=sum(contact),Is=I)
   rm(fc)
   rm(f.c)

@@ -3,7 +3,7 @@ source(file.path(R.home("share"), "R", "examples-header.R"))
 options(warn = 1)
 library('CNA')
 
-assign(".oldSearch", search(), pos = 'CheckExEnv')
+base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
 cleanEx()
 nameEx("CNA-package")
 ### * CNA-package
@@ -58,31 +58,6 @@ image(cate,cate,beta,col = rainbow(50),zlim = c(0,0.1),xlab='male age',ylab='fem
 this.bridge<-bridge(male.id,female.id,male.age,female.age,contact,data=r,gap=10)
 summary.bridge(this.bridge)
 
-
-
-
-cleanEx()
-nameEx("find.bridge")
-### * find.bridge
-
-flush(stderr()); flush(stdout())
-
-### Name: bridge
-### Title: Identification of Bridging Nodes in Networks
-### Aliases: bridge bridge
-### Keywords: contact network network bridging
-
-### ** Examples
-
-male.id<-c(1, 2, 3, 4, 4, 5, 5, 6, 7)
-female.id<-c(8, 9, 10, 10, 11, 12, 10, 13, 14)
-male.age <- c(15, 20, 18, 40, 40, 26, 26, 25, 23)
-female.age <- c(19, 14, 15, 15, 45, 24, 15, 25, 22)
-contact<-c(1, 1.2, 0.5, 0.2, 0.8, 1.4, 1, 2, 1.1)
-r<-data.frame(male.id,female.id, male.age,female.age,contact)
-gap<-10
-this.bridge<-bridge(male.id,female.id,male.age,female.age,contact,data=r,gap=10)
-print(this.bridge)
 
 
 
@@ -182,41 +157,10 @@ sample<-sampling(id.names=id,data=r,method)
 
 
 
-cleanEx()
-nameEx("summary.bridge")
-### * summary.bridge
-
-flush(stderr()); flush(stdout())
-
-### Name: summary.bridge
-### Title: Network Bridging Summaries
-### Aliases: summary.bridge summary.bridge
-### Keywords: contact network network bridging
-
-### ** Examples
-
-male.id<-c(1, 2, 3, 4, 4, 5, 5, 6, 7)
-female.id<-c(8, 9, 10, 10, 11, 12, 10, 13, 14)
-male.age <- c(15, 20, 18, 40, 40, 26, 26, 25, 23)
-female.age <- c(19, 14, 15, 15, 45, 24, 15, 25, 22)
-contact<-c(1, 1.2, 0.5, 0.2, 0.8, 1.4, 1, 2, 1.1)
-r<-data.frame(male.id,female.id, male.age,female.age,contact)
-gap<-10
-this.bridge<-bridge(male.id,female.id,male.age,female.age,contact,data=r,gap=10)
-summary.bridge(this.bridge)
-
-#  "summary of bridging behaviour"
-#  no.of.nodes ave.degree max.gap no.of.bridge percentage
-#          14       1.29      30            2      14.29
-# 2 of the 14 nodes are bridges
-# the mean number of partners is 1.29
-# the maximum age difference among partners of one individual is 30 years
-  
-
-
 ### * <FOOTER>
 ###
-cat("Time elapsed: ", proc.time() - get("ptime", pos = 'CheckExEnv'),"\n")
+options(digits = 7L)
+base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
 grDevices::dev.off()
 ###
 ### Local variables: ***
