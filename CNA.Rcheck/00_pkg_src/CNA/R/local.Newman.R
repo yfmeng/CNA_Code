@@ -1,5 +1,5 @@
 
-assort.Newman<-function(g,attribute.name,cate,contact,...){
+local.Newman<-function(g,attribute.name,cate,contact,...){
   # network = g, attribute.name, contact, cate
   require('network')
   require('sna')
@@ -23,7 +23,7 @@ assort.Newman<-function(g,attribute.name,cate,contact,...){
   eii<-0
   for (i in 1:n){
     for (j in 1:n){
-      weightij<-sum(weight[x1==l[i]&x2==l[j]])
+      contactij<-sum(weight[x1==l[i]&x2==l[j]])
       a[i]<-a[i]+weightij
       b[j]<-b[j]+weightij
       eii<-eii+weightij*(i==j)
@@ -32,8 +32,13 @@ assort.Newman<-function(g,attribute.name,cate,contact,...){
   a <-a/sum(weight)
   b <-b/sum(weight)
   eii<-eii/sum(weight)
-  r<-(eii-sum(a*b))/(1-sum(a*b))
-  r<-data.frame(categories = n,sample.size = network.size(g),weights=sum(weight),Newman=r)
-  r
+  divide<-(1-sum(a*b))*Ne
+  
+  ids<- 1:network.size(g)
+  local.r <- c()
+  for ( i in ids){
+    range <- which(edgelist[,1]==i|edgelist[,2]==i)
+    local.r[i]<-sum(x1[range]==x2[range])
+  }
+  local.r<-local.r/divide
 }
-

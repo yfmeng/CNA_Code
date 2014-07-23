@@ -3,27 +3,27 @@
 \alias{assort.Gupta}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Gupta's Q Index for Measuring Network Assortativeness
+Calculating Gupta's Q assortativity coefficient
 }
 \description{
-assort.Gupta is used to calculate the network assortativeness using Gupta's Q method. 
+assort.Gupta is used to calculate network assortativity with Gupta's Q measurement.
 }
 \usage{
-assort.Gupta(g,attribute.name, ...)
+assort.Gupta(g, attribute.name, cate, contact, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{g}{
-a network
+the network to be measured
 }
   \item{attribute.name}{
-the name of the vertex attribute to be measured
-}
-  \item{contact}{
-contact rate between two individuals; default value is 1 for every edge
+a string, name of the vertex attribute
 }
   \item{cate}{
-a vector, specifying the cutpoints of subgroup division
+a vector, cut points of the attribute
+}
+  \item{contact}{
+a string. If contact is name of an edge attribute, the value of this attribute will be used as weight on edges, otherwise edges are not weighted. Use "contact = ''" for unweighted networks.
 }
   \item{\dots}{
 %%     ~~Describe \code{\dots} here~~
@@ -31,17 +31,19 @@ a vector, specifying the cutpoints of subgroup division
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
-The assort.Newman function uses edge list data of contact networks.
 }
 \value{
-The returned value is a data frame.
+%%  ~Describe the value returned
+%%  If it is a LIST, use
+%%  \item{comp1 }{Description of 'comp1'}
+%%  \item{comp2 }{Description of 'comp2'}
+%% ...
 }
 \references{
-Gupta S., Anderson R.M., and May, R.M. (1989) Networks of sexual contacts: implications for the patterns of spread of HIV. AIDS. 3. 807-817.
+Gupta S, Anderson RM, May RM (1989) Networks of sexual contacts: implications for the pattern of spread of HIV. AIDS 3: 807-817.
 }
 \author{
-%%  ~~who you are~~
-Fei MENG <fei.d.meng@gmail.com>
+Fei MENG\email{fei.d.meng@gmail.com}
 }
 \note{
 %%  ~~further notes~~
@@ -50,13 +52,18 @@ Fei MENG <fei.d.meng@gmail.com>
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-Other measures of assortativeness in \link{CNA} package are \code{\link{assort.Newman}}, \code{\link{assort.Farrington}}
+\code{\link{help}}
 }
 \examples{
-
+require(network)
+m <- matrix(rbinom(25,1,.2),20,20)
+diag(m) <- 0
+g <- network(m, directed=FALSE)
+g <- set.vertex.attribute(g,'attr',runif(20))
+g <- set.edge.attribute(g,'weight',rweibull(network.edgecount(g),1.5,1))
+cut<-seq(0,1,by = 0.1)
+assort.Gupta(g,'attr',cate=cut,contact='weight')
+assort.Gupta(g,'attr',cate=cut,contact='')
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{network assortativeness}
-\keyword{contact network}
+\keyword{ network assortativity }
+\keyword{ Q coefficient }

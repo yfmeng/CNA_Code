@@ -1,32 +1,28 @@
-assort.Farrington<-function(g,attribute.name,cate,contact,bi=c(F,'gender'),directed=TRUE,standard = 'sd',verbose,...){
+local.Farrington<-function(g,attribute.name,bi=c(F,'gender'),directed=TRUE,standard = 'sd',cate,...){
+  require('network')
+  require('sna')
   Ne<-network.edgecount(g)
   edgelist <- as.edgelist.sna(g)[1:Ne,]
-  if(missing(contact)){contact<-''}
-  if(missing(bi)){bi<-c(FALSE,'')}
-  if(missing(directed)){directed<-FALSE}
-  if(missing(standard)){standard<-'sd'}
-  if(missing(verbose)){verbose<-FALSE}
-  if (verbose){
-    cat('Network assortativity with Farrington\'s Q method')
-  }
   x1 <- get.vertex.attribute(g,attribute.name)[edgelist[,1]]
   x2 <- get.vertex.attribute(g,attribute.name)[edgelist[,2]]
-  if (!is.null(get.edge.attribute(g,contact))){
-    weight <- get.edge.attribute(g,contact)
-  }else{
-    weight<-rep(1,nrow(edgelist))
-    if (verbose) cat('edges unweighted')
-  }
+  if (exists('contact')){
+    if (!is.null(get.edge.attribute(g,contact))){
+      contact <- get.edge.attribute(g,contact)
+    }else{contact<-rep(1,nrow(edgelist))}
+  }else{contact<-rep(1,nrow(edgelist))}
+  # 
   if(!directed){
     # homogenous nodes (temporary solution)
     temp<-x1
     x1<-c(x1,x2)
     x2<-c(x2,temp)
-    weight<-c(weight,weight)/2
+    contact<-c(contact,contact)/2
   }
+  
   # mean value in each bin
   x1.temp<-get.vertex.attribute(g,attribute.name)
   x2.temp<-x1.temp
+  
   if (bi[1]){
     bi.attr<-get.vertex.attribute(g,bi[2])
     x1.temp<-x1.temp[bi.attr==unique(bi.attr)[1]]
@@ -34,8 +30,6 @@ assort.Farrington<-function(g,attribute.name,cate,contact,bi=c(F,'gender'),direc
   }
   s1<-c()
   s2<-c()
-  
-  
   for (i in 1:(length(cate)-1)){
     s1[i]<-mean(x1.temp[x1.temp>cate[i]&x1.temp<=cate[i+1]])
     s2[i]<-mean(x2.temp[x2.temp>cate[i]&x2.temp<=cate[i+1]])
@@ -55,6 +49,7 @@ assort.Farrington<-function(g,attribute.name,cate,contact,bi=c(F,'gender'),direc
   x1.temp<-cut.cna(x1.temp,cate,add = F)$x
   x2.temp<-cut.cna(x2.temp,cate,add = F)$x
   l<-levels(x1)
+  
   n<-length(cate)-1
   distr1<-rep(0,n)
   distr2<-rep(0,n)
@@ -68,8 +63,8 @@ assort.Farrington<-function(g,attribute.name,cate,contact,bi=c(F,'gender'),direc
   
   for (i in 1:n){
     for (j in 1:n){
-      weightij<-sum(weight[x1==l[i]&x2==l[j]])
-      beta[i,j]<-weightij/(sum(x1.temp==l[i])*sum(x2.temp==l[j]))
+      contactij<-sum(contact[x1==l[i]&x2==l[j]])
+      beta[i,j]<-contactij/(sum(x1.temp==l[i])*sum(x2.temp==l[j]))
     }
   }
   beta[is.na(beta)]<-0 
@@ -82,20 +77,19 @@ assort.Farrington<-function(g,attribute.name,cate,contact,bi=c(F,'gender'),direc
     }
   }
   fc<-fc/total
-  f.c<-list()
-  f.c[[1]]<-fc
-  f.c[[2]]<-data.frame(proportion1,proportion2)
-  f.c[[3]]<-data.frame(s1,s2)
-  I<-0
-  for (i in 1:nrow(f.c[[1]])){
-    for (j in 1:ncol(f.c[[1]])){
-      I <- I+(f.c[[3]]$s1[i]-f.c[[3]]$s2[j])^2*f.c[[1]][i,j]
+  
+  ids<- 1:network.size(g)
+  local.I <- rep(0,length(idx))
+  for (i in ids){
+    range <- which(edgelist[,1]==i|edgelist[,2]==i)
+    for (r in range){
+      ii<-which(l==x1[r])
+      jj<-which(l==x2[r])
+      sq <- (s1[ii]-s2[jj])^2
+      local.I[i] <-  local.Q[i]+sq*proportion1[ii]*proportion2[jj]*beta[ii,jj]
     }
   }
- 
-  Is<-I/2/delta 
-  I<-c(I=I,Is = Is)
-  rm(fc)
-  rm(f.c)
-  I
+  local.I[is.na(local.I)]<-0
+  local.I<-local.I/2/delta
+  local.I
 }
