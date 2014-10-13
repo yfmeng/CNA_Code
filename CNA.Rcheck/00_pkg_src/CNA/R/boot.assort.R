@@ -7,20 +7,22 @@ boot.assort<-function(g,attribute.name,cate,contact,method,R,verbose,...){
   if (!is.null(get.edge.attribute(g,contact))){
     weight <- get.edge.attribute(g,contact)
   }else{weight<-rep(1,nrow(edgelist))}
-  if (method=='Farrington'){
+  if (method[1]=='Farrington'){
     #bi=c(F,'gender'),directed=TRUE,standard = 'sd'
     bi1<-'F'
-    if(bi[1]) {bi1<-'T'}
+    if(as.logical(method[2])) {bi1<-'T'}
     di<-'F'
-    if(directed) {di<-'T'}
-    opt.args <-sprintf(',bi=c(%s,\'%s\'),directed = %s,standard=\'%s\'',bi1,bi[2],di,standard)
+    if(as.logical(method[4])) {di<-'T'}
+    standard<-'sd'
+    if(length(method)>4){standard<-method[5]}
+    opt.args <-sprintf(',bi=c(%s,\'%s\'),directed = %s,standard=\'%s\'',bi1,method[3],di,standard)
   }else{opt.args<-''}
   
   if (missing('verbose')){verbose<-F}
   if(missing(R)){R = 1000}
   edge.id<-1:Ne
   results<-rep(0,R)
-  xpress<-sprintf('assort.%s(sample,attribute.name,cate,\'%s\'%s)',method,'',opt.args)
+  xpress<-sprintf('assort.%s(sample,attribute.name,cate,\'%s\'%s)',method[1],'',opt.args)
   
   if(verbose){
     print(sprintf('Boosstrapping calls:%s',xpress))
