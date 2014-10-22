@@ -1,13 +1,14 @@
-assort.Farrington<-function(g,attribute.name,cate,contact,bi=c(F,'gender'),directed=TRUE,standard = 'sd',verbose,...){
+require('network')
+require('sna')
+assort.Farrington<-function(g,attribute.name,cate,contact,bi=c(F,'gender'),standard = 'sd',verbose,...){
   Ne<-network.edgecount(g)
   edgelist <- as.edgelist.sna(g)[1:Ne,]
   if(missing(contact)){contact<-''}
   if(missing(bi)){bi<-c(FALSE,'')}
-  if(missing(directed)){directed<-FALSE}
   if(missing(standard)){standard<-'sd'}
   if(missing(verbose)){verbose<-FALSE}
   if (verbose){
-    cat('Network assortativity with Farrington\'s Q method')
+    cat('Network assortativity with Farrington\'s I method')
   }
   x1 <- get.vertex.attribute(g,attribute.name)[edgelist[,1]]
   x2 <- get.vertex.attribute(g,attribute.name)[edgelist[,2]]
@@ -17,17 +18,20 @@ assort.Farrington<-function(g,attribute.name,cate,contact,bi=c(F,'gender'),direc
     weight<-rep(1,nrow(edgelist))
     if (verbose) cat('edges unweighted')
   }
-  if(!directed){
-    # homogenous nodes (temporary solution)
+  
+  bipart<-as.logical(bi[1])
+  if(!bipart){
+    # x1,x2: age of partners, pairwise
     temp<-x1
     x1<-c(x1,x2)
     x2<-c(x2,temp)
     weight<-c(weight,weight)/2
   }
-  # mean value in each bin
+  # 
   x1.temp<-get.vertex.attribute(g,attribute.name)
   x2.temp<-x1.temp
-  if (bi[1]){
+  if (bipart){
+    # x1.temp,x2.temp: age of individuals, personwise
     bi.attr<-get.vertex.attribute(g,bi[2])
     x1.temp<-x1.temp[bi.attr==unique(bi.attr)[1]]
     x2.temp<-x2.temp[bi.attr==unique(bi.attr)[2]]

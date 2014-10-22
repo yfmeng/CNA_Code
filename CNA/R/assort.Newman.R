@@ -1,8 +1,8 @@
-
+require('network')
+require('sna')
 assort.Newman<-function(g,attribute.name,cate,contact,verbose,...){
   # network = g, attribute.name, contact, cate
-  require('network')
-  require('sna')
+  
   if(missing(contact)){contact<-''}
   if(missing(verbose)){verbose<-FALSE}
   if (verbose){

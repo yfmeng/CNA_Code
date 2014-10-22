@@ -1,20 +1,21 @@
-assort.jackknife<-function(g,attribute.name,cate,contact,method,verbose,...){
+assort.jackknife<-function(g,attribute.name,cate,contact,method,method.args,verbose,...){
   Ne<-network.edgecount(g)
   if(missing(contact)) contact <-''
   if(missing(method)) method<-'Newman'
   if (missing('verbose')){verbose<-F}
-  if (method[1]=='Farrington'){
-    #bi=c(F,'gender'),directed=TRUE,standard = 'sd'
-    bi1<-'F';bi2<-'';di<-'F'
-    if(length(method)>1){      
-      if(as.logical(method[2])) {bi1<-'T';bi2<-method[3]}
-      di<-'F'
-      if(as.logical(method[3])) {di<-'T'}
+  if (method=='Farrington'){
+    if (missing(method.args)){
+      bi1<-'F';bi2<-'';standard='sd'
+    }else{
+      bi1<-as.logical(method.args[[1]][1])
+      bi2<-method.args[[1]][2]
+      standard<-method.args[[2]]
     }
-    opt.args <-sprintf(',bi=c(%s,\'%s\'),directed = %s,standard=\'%s\'',bi1,bi2,di,standard)
+    opt.args <-sprintf(',bi=c(%s,\'%s\'),standard=\'%s\'',bi1,bi2,standard)
   }else{opt.args<-''}
+  edge.id<-1:Ne
+  xpress<-sprintf('assort.%s(sample,attribute.name,cate,\'%s\'%s)',method,'',opt.args)
   
-  xpress<-sprintf('assort.%s(sample,attribute.name,cate,\'%s\',%s)',method,contact,opt.args)
   if(verbose){
     cat(sprintf('Jackknife calls:%s',xpress))
     cat(sprintf('Network name: %s',deparse(substitute(g))))

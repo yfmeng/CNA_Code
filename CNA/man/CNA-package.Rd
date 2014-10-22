@@ -6,27 +6,28 @@
 Contact Network Assortativeness
 }
 \description{
-This package calculate assortativeness and bridging behaviours of a network using.
+This package calculates assortativeness and bridging behaviours of a network.
 
 }
 \details{
 \tabular{ll}{
 Package: \tab CNA\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2014-05-15\cr
-License: \tab Artistic Lisence\cr
+Version: \tab 0.1\cr
+Date: \tab 2014-10-15\cr
+License: \tab \cr
 }
  \code{
+ \link{assort.boots}\cr
  \link{assort.Farrington}\cr
  \link{assort.Gupta}\cr
+  \link{assort.jackknife}\cr
  \link{assort.Newman}\cr
  \link{boot.assort}\cr
  \link{bridge}\cr
- \link{ cut.cna}\cr
+ \link{cut.cna}\cr
  \link{find.component}\cr
- \link{ jackknife.assort}\cr
- \link{ sampling}\cr
+ \link{sampling}\cr
  \link{sampling.method}
  }
 }

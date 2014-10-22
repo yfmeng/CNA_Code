@@ -8,11 +8,9 @@ Calculating Farrington's I and Is disassortativity index
 }
 \description{
 assort.Farrington is used to calculate network disassortativity with Farrington's I and Is measurement, using categorical network attributes. 
-assort.FarringtonC applies to continuous data.
 }
 \usage{
-assort.Farrington(g, attribute.name, cate, contact, bi = c(F, "gender"), directed = TRUE, standard = "sd", ...)
-assort.FarringtonC(g, attribute.name, contact, bi = c(F, "gender"), directed = TRUE, standard = "sd", ...)
+assort.Farrington(g, attribute.name, cate, contact, bi = c(F, "gender"), standard = "sd", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -26,16 +24,13 @@ a string, name of the vertex attribute
 a vector, cut points of the attribute
 }
   \item{contact}{
-a string. If contact is name of an edge attribute, the value of this attribute will be used as weight on edges, otherwise edges are not weighted. Use "contact = ''" for unweighted networks.
+a string. If contact is name of an edge attribute, the value of this attribute will be used as weight on edges, otherwise edges are not weighted. Use \code{contact = ''} for unweighted networks.
 }
   \item{bi}{
 a vector, optional argument. The first element indicates if the network is bipartite. If bipartite, the second element is name of the vertex attribute that identify the two parts. Default value is FALSE.
 }
-  \item{directed}{
-logical, optional argument. If true the network is taken as directed, regardless to the built-in network attribute 'directed'. Default value is TRUE.
-}
   \item{standard}{
-a string. Optional argument that indicates standardisation method. Default value is 'sd'.
+a string. Optional argument that indicates standardisation method. Default value is \code{'sd'}.
 }
   \item{\dots}{
 %%     ~~Describe \code{\dots} here~~

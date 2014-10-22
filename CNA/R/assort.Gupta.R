@@ -1,6 +1,6 @@
+require('network')
+require('sna')
 assort.Gupta<-function(g,attribute.name,cate,contact,verbose,...){
-  require('network')
-  require('sna')
   if(missing(contact)){contact<-''}
   if(missing(verbose)){verbose<-FALSE}
   if (verbose){
@@ -30,7 +30,11 @@ assort.Gupta<-function(g,attribute.name,cate,contact,verbose,...){
     ai[i]<-sum(weight[x1>=cate[i]&x1<=cate[i+1]])
     bi[i]<-sum(weight[x2>=cate[i]&x2<=cate[i+1]])
   }
-  Q<-sum((eii[eii!=0]-ai[eii!=0]*bi[eii!=0])/ai[eii!=0])/(n-1)
-  if(sum(eii[eii!=0])==sum(ai[eii!=0])){Q<-1}
+  
+  if(sum(eii[eii!=0])==sum(ai[eii!=0])){
+    Q<-1
+  }else{
+    Q<-sum((eii[eii!=0]-ai[eii!=0]*bi[eii!=0])/ai[eii!=0])/(n-1)
+  }
   Q
 }

@@ -3,11 +3,11 @@
 \alias{cut.cna}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Convert numeric to factor 
+Factorise numeric vectors
 }
 \description{
-\code{cut.cna} is a extension of \code{\link{cut}}{\code{\link{base}}}.
-Values that exceed the range of given cut points are handled to avoid coerced \code{NA}. 
+\code{cut.cna} is a extension of {\code{\link{base::cut}}}.
+Values that exceed the range of given cut points can be handled to avoid coerced \code{NA}. 
 }
 \usage{
 cut.cna(x, cate, add = F, ...)
@@ -36,27 +36,19 @@ logical, if \code{TRUE}, extra intervals are added to the given categories when 
 \item{cate}{updated \code{cate}}
 }
 \references{
-%% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+Fei MENG\email{fei.d.meng@gmail.com}
 }
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
  \code{\link{cut}}
 }
 \examples{
- x<- 1:20
+ x<- 1:25
  cate<- c(5,10,15,20)
  x.1<-cut.cna(x,cate,add=F)$x
- cate.1<-cut.cna(x,cate,add=F)$cate # cate.1=c(1,10,15,20)
+ cate.1<-cut.cna(x,cate,add=F)$cate # cate.1=c(1,10,15,25)
  x.2<-cut.cna(x,cate,add=T)$x
- cate.2<-cut.cna(x,cate,add=T)$cate # cate.2=c(1,5,10,15,20)
+ cate.2<-cut.cna(x,cate,add=T)$cate # cate.2=c(1,5,10,15,20,25)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.

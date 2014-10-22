@@ -55,6 +55,7 @@ g <- network(m, directed=FALSE)
 g <- set.vertex.attribute(g,'attr',runif(20))
 g <- set.edge.attribute(g,'weight',rweibull(network.edgecount(g),1.5,1))
 bridgers<-bridge(g,'attr',gap = 0.2)
+bridgers
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
