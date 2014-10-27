@@ -7,3 +7,4 @@ Author: Fei MENG
 Maintainer: Fei MENG <fei.d.meng@gmail.com>
 Description: Contact Network Assortativeness
 License: Artistic Lisence
+LazyData: true
